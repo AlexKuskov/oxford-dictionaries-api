@@ -8,15 +8,11 @@ export class MainService {
 
   constructor(private http: HttpClient) { }
 
-  // httpHeaders: Object = {
-    
-  // }
-  baseUrl: string = "https://od-api.oxforddictionaries.com/api/v2/entries/en-us/example";
+  baseUrl: string = "/api/v2/languages";
 
   initial() {
     const httpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json",
         "app_id": "61764e40",
         "app_key": "257549167a9e34c55f3a8ed7d1eee7c9"
       })
