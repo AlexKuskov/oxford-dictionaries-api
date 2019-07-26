@@ -9,6 +9,9 @@ export class MainService {
   constructor(private http: HttpClient) { }
 
   baseUrl: string = "/api/v2/languages";
+  // /entries/{source_lang}/{word_id}
+  // /lemmas/{source_lang}/{word_id}
+  // https://od-api.oxforddictionaries.com/api/v2/search/en-gb?q=link
 
   initial() {
     const httpOptions = {
