@@ -1,3 +1,136 @@
-<p>
+<p (click)="onSend()">
   word-info works!
 </p>
+
+<div class="word-info-container">
+  <h1 class="word-info-container__header">Definition of word in English:</h1>
+   <!-- obj.id -->
+  <h2 class="word-info-container__word">word</h2> 
+  <div class="word-info-container__word-audio">
+    <img src="assets/audio-hover.svg" alt="audio">
+  </div>
+
+  <!-- obj.results[0].lexicalEntries[0] -->
+  <section class="lexical-category">
+      <!-- obj.results[0].lexicalEntries[0].lexicalCategory.text -->
+      <h3 class="lexical-category__header">noun</h3>
+
+      <ol class="senses">
+        <li class="sense">
+            <span class="word-form-note">(<strong>a word</strong>)</span>
+            <span class="grammatical-note">[with negative]</span>
+          <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].definitions -->
+          <div class="lexical-category-definition">
+            <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].notes[0].text -->
+            <!-- for text like (bold text), and [negative] text -->
+            
+            a single distinct meaningful element of speech or 
+            writing, used with others (or sometimes alone) to form a sentence and typically shown with a 
+            space on either side when written or printed
+          </div>
+
+          <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].examples[0].text -->
+          <div class="lexical-category-example">‘why so many words for so few ideas?’</div>
+
+          <ol class="subsenses">
+            <li class="subsense">
+              <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[0].definitions -->
+              <div class="lexical-category-subsense">
+                <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[0].notes[0].text
+                there are wordFormNote and grammaticalNote types -->
+                a single distinct conceptual unit of language, comprising inflected and variant forms.
+              </div>
+
+              <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[0].examples[0].text -->
+              <div class="lexical-category-example">
+                  ‘All I will say is that this movie was true in the basic sense of the word.’
+              </div>
+            </li>
+          </ol>
+
+        </li>
+
+        <li class="sense">
+            <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].definitions -->
+            <div class="lexical-category-definition">
+              <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].notes[0].text -->
+              <!-- for text like (bold text), and [negative] text -->
+              a single distinct meaningful element of speech or 
+              writing, used with others (or sometimes alone) to form a sentence and typically shown with a 
+              space on either side when written or printed
+            </div>
+  
+            <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].examples[0].text -->
+            <div class="lexical-category-example">‘why so many words for so few ideas?’</div>
+  
+            <ol class="subsenses">
+              <li class="subsense">
+                <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[0].definitions -->
+                <div class="lexical-category-subsense">
+                  <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[0].notes[0].text
+                  there are wordFormNote and grammaticalNote types -->
+                  a single distinct conceptual unit of language, comprising inflected and variant forms.
+                </div>
+  
+                <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[0].examples[0].text -->
+                <div class="lexical-category-example">
+                    ‘All I will say is that this movie was true in the basic sense of the word.’
+                </div>
+              </li>
+
+              <li class="subsense">
+                  <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[0].definitions -->
+                  <div class="lexical-category-subsense">
+                    <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[0].notes[0].text
+                    there are wordFormNote and grammaticalNote types -->
+                    a single distinct conceptual unit of language, comprising inflected and variant forms.
+                  </div>
+    
+                  <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[0].examples[0].text -->
+                  <div class="lexical-category-example">
+                      ‘All I will say is that this movie was true in the basic sense of the word.’
+                  </div>
+                </li>
+
+                <li class="subsense">
+                    <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[0].definitions -->
+                    <div class="lexical-category-subsense">
+                      <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[0].notes[0].text
+                      there are wordFormNote and grammaticalNote types -->
+                      a single distinct conceptual unit of language, comprising inflected and variant forms.
+                    </div>
+      
+                    <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[0].examples[0].text -->
+                    <div class="lexical-category-example">
+                        ‘All I will say is that this movie was true in the basic sense of the word.’
+                    </div>
+                  </li>
+            </ol>
+  
+          </li>
+        
+      </ol>
+
+  </section>
+
+  <section class="lexical-category">
+    <!-- obj.results[0].lexicalEntries[0].entries[0].etymologies -->
+    <h3 class="black-header">Origin</h3>
+    <div class="etymologies">
+        Old English, of Germanic origin; related to Dutch woord and German Wort, from an Indo-European 
+        root shared by Latin verbum ‘word’.
+    </div>
+  </section>
+
+  <!-- <section class="pronunciation-section"> -->
+  <section class="lexical-category">
+    <h3 class="black-header">Pronunciation</h3>
+    <strong class="word">word</strong>
+    <!-- obj.results[0].lexicalEntries[0].pronunciations.phoneticSpelling -->
+    <span class="phonetic-pronunciation">/wəːd/</span>
+    <!-- obj.results[0].lexicalEntries[0].pronunciations.audioFile -->
+    <span class="word-info-container__word-audio word-audio-pronunciation">
+      <img src="assets/audio-hover.svg" alt="audio">
+    </span>
+  </section>
+</div>

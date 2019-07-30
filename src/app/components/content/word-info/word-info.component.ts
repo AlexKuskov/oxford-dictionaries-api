@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MainService } from 'src/app/sevices/main.service';
 
 @Component({
   selector: 'app-word-info',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WordInfoComponent implements OnInit {
 
-  constructor() { }
+  constructor(private mainService: MainService) { }
 
   ngOnInit() {
+  }
+
+  onSend() {
+    this.mainService.initial();
   }
 
 }
