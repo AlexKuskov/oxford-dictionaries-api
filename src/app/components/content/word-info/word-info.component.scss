@@ -15,13 +15,45 @@
     margin: 0;
 }
 
+.homographs {
+    border: 2px solid #DFEAF0;
+    padding: 8px;
+    padding-bottom: 5px;
+    background-color: #f8fafe;
+    font-weight: 600;
+    line-height: 1.6em;
+    font-size: 16px;
+}
+
+.homographs__header {
+    display: inline;
+    max-width: 100%;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.homographs__word {
+    font-style: normal;
+    font-weight: 700;
+}
+
+.homographs__link {
+    color: rgb(60, 154, 227);
+    margin-right: 8px;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
 .word-info-container__word {
     display: inline-block;
     margin-right: 6px;
     font-size: 34px;
 }
 
-.word-info-container__word-audio {
+.word-audio {
     display: inline-block;
     margin: 0 10px;
     height: 24px;
@@ -47,7 +79,11 @@
     margin: 0;
 }
 
-.lexical-category-definition, .etymologies {
+.sense__main-block {
+    margin-bottom: 19px;
+}
+
+.sense__definition, .lexical-category__etymologies {
     line-height: 24px;
 
     &:only-of-type { 
@@ -59,7 +95,7 @@
     }
 }
 
-.lexical-category-example {
+.sense__example {
     font-family: 'Merriweather', sans-serif;
     font-style: italic;
     margin: 4px 0 7px;
@@ -81,11 +117,12 @@
         font-weight: 700;
         position: absolute;
         left: -24px;
+        top: 4px;
         font-size: 14px;
     }
 }
 
-.lexical-category-subsense {
+.sense__subsense-definition {
     line-height: 24px;
 
     &:only-of-type { 
@@ -97,13 +134,13 @@
     }
 }
 
-.subsenses {
+.sense__subsenses {
     list-style: none;
     counter-reset: subsense;
     padding: 0;
 }
 
-.subsense {
+.sense__subsense {
     position: relative;
     counter-increment: subsense;
     padding-left: 33px;
@@ -114,32 +151,39 @@
         font-weight: 700;
         position: absolute;
         left: 0;
+        top: 4px;
         font-size: 14px;
     }
 }
 
-.black-header {
+.lexical-category__black-header {
     color: rgb(0, 0, 0);
     margin: 0;
     margin-bottom: 4px;
     font-size: 18px;
 }
 
-.phonetic-pronunciation {
+.lexical-category__phonetic-pronunciation {
     margin-left: 7px;
 }
 
-.grammatical-note {
+.sense__word-form-note {
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    font-style: normal;
+}
+
+.sense__grammatical-note {
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
     color: #27a058;
     font-style: italic;
     font-size: 16px;
 }
 
-.word-audio-pronunciation {
+.word-audio--pronunciation {
     vertical-align: middle;
 }
 
-.word {
+.lexical-category__word {
     font: 700 18px "Merriweather", Georgia, "Times New Roman", sans-serif;
     font-family: "Merriweather", Georgia, "Times New Roman", sans-serif;
 }
