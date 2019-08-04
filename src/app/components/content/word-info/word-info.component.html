@@ -2,133 +2,93 @@
   word-info works!
 </p>
 
-<div class="word-info-container">
+<!-- results: -->
+<div class="word-info-container" *ngFor="let result of results">
   <h1 class="word-info-container__header">Definition of {{ word }} in English:</h1>
   <!-- <div class="homographs">
-    <h1 class="homographs__header">Main definitions of <em class="homographs__word">set</em> in English</h1>: 
+    <h1 class="homographs__header">Main definitions of <em class="homographs__word">{{ word }}</em> in English</h1>: 
     <a class="homographs__link" href="#1">set<sup>1</sup></a>
     <a class="homographs__link" href="#2">set<sup>2</sup></a>
     <a class="homographs__link" href="#3">set<sup>3</sup></a>
   </div> -->
    <!-- obj.id -->
-  <h2 class="word-info-container__word">{{ word }}</h2> 
+  <h2 class="word-info-container__word">{{ result.id }}</h2> 
   <div class="word-audio">
     <img src="assets/audio-hover.svg" alt="audio">
+    <audio [src]="result.lexicalEntries[0].pronunciations[0].audioFile"></audio>
   </div>
 
   <!-- obj.results[0].lexicalEntries[0] -->
-  <section class="lexical-category">
-      <!-- obj.results[0].lexicalEntries[0].lexicalCategory.text -->
-      <h3 class="lexical-category__header">noun</h3>
+  <section class="lexical-category" *ngFor="let lexicalEntry of result.lexicalEntries">
+      <!-- obj.results[0].lexicalEntries[0].lexicalCategory.id -->
+      <h3 class="lexical-category__header">{{ lexicalEntry.lexicalCategory.id }}</h3>
 
       <ol class="senses">
-        <li class="sense">        
+        <!-- senses: -->
+        <li class="sense" *ngFor="let sense of lexicalEntry.entries[0].senses">        
           <div class="sense__main-block">
-            <span class="sense__word-form-note">(<strong>a word</strong>) </span>
-            <span class="sense__grammatical-note">[with negative]</span>
+            <ng-template ngFor let-note [ngForOf]="sense.notes">
+              <span class="sense__word-form-note" *ngIf="isWordFormNoteType(note.type)">
+                (<strong>{{ note.text }}</strong>)
+              </span>
+              <span class="sense__grammatical-note" *ngIf="isGrammaticalNoteType(note.type)">
+                [{{ note.text }}]
+              </span>
+            </ng-template>
             <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].definitions -->
             <span class="sense__definition">
               <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].notes[0].text -->
               <!-- for text like (bold text), and [negative] text -->
               
-              a single distinct meaningful element of speech or 
-              writing, used with others (or sometimes alone) to form a sentence and typically shown with a 
-              space on either side when written or printed
+              {{ editDescription(sense.definitions[0]) }}
             </span>
 
             <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].examples[0].text -->
-            <div class="sense__example">
-              <span class="sense__word-form-note">(<strong>a word</strong>) </span>
-              <span class="sense__grammatical-note">[with negative]</span>
-              ‘why so many words for so few ideas?’
+            <div class="sense__example" *ngFor="let example of sense.examples">
+              <ng-template ngFor let-note [ngForOf]="example.notes">
+                <span class="sense__word-form-note" *ngIf="isWordFormNoteType(note.type)">
+                  (<strong>{{ note.text }}</strong>)
+                </span>
+                <span class="sense__grammatical-note" *ngIf="isGrammaticalNoteType(note.type)">
+                  [{{ note.text }}]
+                </span>
+              </ng-template>
+              <!-- <span class="sense__word-form-note">(<strong>a word</strong>) </span>
+              <span class="sense__grammatical-note">[with negative]</span> -->
+              ‘{{ example.text }}’
             </div>
-            <div class="sense__example">‘why so many words for so few ideas?’</div>
           </div>
 
           <ol class="sense__subsenses">
-            <li class="sense__subsense">
+            <li class="sense__subsense" *ngFor="let subsense of sense.subsenses">
               <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[0].definitions -->
               <div class="sense__subsense-definition">
+                <ng-template ngFor let-note [ngForOf]="subsense.notes">
+                  <span class="sense__word-form-note" *ngIf="isWordFormNoteType(note.type)">
+                    (<strong>{{ note.text }}</strong>)
+                  </span>
+                  <span class="sense__grammatical-note" *ngIf="isGrammaticalNoteType(note.type)">
+                    [{{ note.text }}]
+                  </span>
+                </ng-template>
                 <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[0].notes[0].text
                 there are wordFormNote and grammaticalNote types -->
-                a single distinct conceptual unit of language, comprising inflected and variant forms.
+                {{ editDescription(subsense.definitions[0]) }}
               </div>
 
               <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[0].examples[0].text -->
-              <div class="sense__example">
-                  ‘All I will say is that this movie was true in the basic sense of the word.’
+              <div class="sense__example" *ngFor="let example of subsense.examples">
+                <ng-template ngFor let-note [ngForOf]="example.notes">
+                  <span class="sense__word-form-note" *ngIf="isWordFormNoteType(note.type)">
+                    (<strong>{{ note.text }}</strong>)
+                  </span>
+                  <span class="sense__grammatical-note" *ngIf="isGrammaticalNoteType(note.type)">
+                    [{{ note.text }}]
+                  </span>
+                </ng-template>
+                ‘{{ example.text }}’
               </div>
             </li>
-          </ol>
-        </li>
-
-        <!-- Second sense -->
-
-        <li class="sense">        
-          <div class="sense__main-block">
-            <span class="sense__word-form-note">(<strong>a word</strong>) </span>
-            <span class="sense__grammatical-note">[with negative]</span>
-            <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].definitions -->
-            <span class="sense__definition">
-              <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].notes[0].text -->
-              <!-- for text like (bold text), and [negative] text -->
-              
-              a single distinct meaningful element of speech or 
-              writing, used with others (or sometimes alone) to form a sentence and typically shown with a 
-              space on either side when written or printed
-            </span>
-
-            <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].examples[0].text -->
-            <div class="sense__example">
-              <span class="sense__word-form-note">(<strong>a word</strong>) </span>
-              <span class="sense__grammatical-note">[with negative]</span>
-              ‘why so many words for so few ideas?’
-            </div>
-            <div class="sense__example">‘why so many words for so few ideas?’</div>
-          </div>
-
-          <ol class="sense__subsenses">
-            <li class="sense__subsense">
-              <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[0].definitions -->
-              <div class="sense__subsense-definition">
-                <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[0].notes[0].text
-                there are wordFormNote and grammaticalNote types -->
-                a single distinct conceptual unit of language, comprising inflected and variant forms.
-              </div>
-
-              <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[0].examples[0].text -->
-              <div class="sense__example">
-                  ‘All I will say is that this movie was true in the basic sense of the word.’
-              </div>
-            </li>
-
-            <li class="sense__subsense">
-                <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[0].definitions -->
-                <div class="sense__subsense-definition">
-                  <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[0].notes[0].text
-                  there are wordFormNote and grammaticalNote types -->
-                  a single distinct conceptual unit of language, comprising inflected and variant forms.
-                </div>
-  
-                <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[0].examples[0].text -->
-                <div class="sense__example">
-                    ‘All I will say is that this movie was true in the basic sense of the word.’
-                </div>
-              </li>
-
-              <li class="sense__subsense">
-                  <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[0].definitions -->
-                  <div class="sense__subsense-definition">
-                    <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[0].notes[0].text
-                    there are wordFormNote and grammaticalNote types -->
-                    a single distinct conceptual unit of language, comprising inflected and variant forms.
-                  </div>
-    
-                  <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[0].examples[0].text -->
-                  <div class="sense__example">
-                      ‘All I will say is that this movie was true in the basic sense of the word.’
-                  </div>
-                </li>
           </ol>
         </li>
       </ol>
@@ -138,8 +98,9 @@
     <!-- obj.results[0].lexicalEntries[0].entries[0].etymologies -->
     <h3 class="lexical-category__black-header">Origin</h3>
     <div class="lexical-category__etymologies">
-        Old English, of Germanic origin; related to Dutch woord and German Wort, from an Indo-European 
-        root shared by Latin verbum ‘word’.
+        <!-- Old English, of Germanic origin; related to Dutch woord and German Wort, from an Indo-European 
+        root shared by Latin verbum ‘word’. -->
+      {{ addDot(result.lexicalEntries[0].entries[0].etymologies[0]) }}
     </div>
   </section>
 
@@ -148,10 +109,13 @@
     <h3 class="lexical-category__black-header">Pronunciation</h3>
     <strong class="lexical-category__word">{{ word }}</strong>
     <!-- obj.results[0].lexicalEntries[0].pronunciations.phoneticSpelling -->
-    <span class="lexical-category__phonetic-pronunciation">/wəːd/</span>
+    <span class="lexical-category__phonetic-pronunciation">
+      /{{ result.lexicalEntries[0].pronunciations[0].phoneticSpelling }}/
+    </span>
     <!-- obj.results[0].lexicalEntries[0].pronunciations.audioFile -->
     <span class="word-audio word-audio--pronunciation">
       <img src="assets/audio-hover.svg" alt="audio">
+      <audio [src]="result.lexicalEntries[0].pronunciations[0].audioFile"></audio>
     </span>
   </section>
 </div>

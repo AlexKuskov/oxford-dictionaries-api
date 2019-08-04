@@ -83,13 +83,15 @@
     margin-bottom: 19px;
 }
 
-.sense__definition, .lexical-category__etymologies {
+.sense__definition, .sense__subsense-definition {
     line-height: 24px;
 
     &:only-of-type { 
         list-style-type: none; 
     }
+}
 
+.lexical-category__etymologies {
     &::first-letter {
         text-transform: uppercase;
     }
@@ -119,18 +121,6 @@
         left: -24px;
         top: 4px;
         font-size: 14px;
-    }
-}
-
-.sense__subsense-definition {
-    line-height: 24px;
-
-    &:only-of-type { 
-        list-style-type: none; 
-    }
-
-    &::first-letter {
-        text-transform: uppercase;
     }
 }
 
