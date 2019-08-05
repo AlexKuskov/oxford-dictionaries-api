@@ -22,14 +22,14 @@ export class WordInfoComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSend() {
+  onSend(): void {
     this.mainService.getResult().subscribe(response => {
       this.word = response.id;
       this.results = response.results;
     });
   }
 
-  editDescription(description: string) {
+  editDescription(description: string): string {
     return this.capitalizeFirstLetter(this.addDot(description));
   }
 
@@ -37,7 +37,7 @@ export class WordInfoComponent implements OnInit {
     return description.charAt(description.length - 1) === '.' ? description : description + '.';
   }
 
-  capitalizeFirstLetter(description: string) {
+  capitalizeFirstLetter(description: string): string {
     return description.charAt(0).toUpperCase() + description.slice(1);
   }
 
@@ -47,6 +47,13 @@ export class WordInfoComponent implements OnInit {
 
   isGrammaticalNoteType(noteType: string): boolean {
     return noteType === 'grammaticalNote';
+  }
+
+  playAudio(audioPath: string) {
+    let audio = new Audio();
+    audio.src = audioPath;
+    audio.load();
+    audio.play();
   }
 
 }

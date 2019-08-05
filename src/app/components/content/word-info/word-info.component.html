@@ -20,8 +20,10 @@
       {{ result.id }}<sup *ngIf="results.length > 1">{{ i + 1 }}</sup>
     </h2> 
     <div class="word-audio">
-      <img src="assets/audio-hover.svg" alt="audio">
-      <audio [src]="result.lexicalEntries[0].pronunciations[0].audioFile"></audio>
+      <img 
+        src="assets/audio-hover.svg" 
+        alt="audio" 
+        (click)="playAudio(result.lexicalEntries[0].pronunciations[0].audioFile)">
     </div>
   </div>
 
@@ -114,8 +116,10 @@
     </span>
 
     <span class="word-audio word-audio--pronunciation">
-      <img src="assets/audio-hover.svg" alt="audio">
-      <audio [src]="result.lexicalEntries[0].pronunciations[0].audioFile"></audio>
+      <img 
+        src="assets/audio-hover.svg" 
+        alt="audio" 
+        (click)="playAudio(result.lexicalEntries[0].pronunciations[0].audioFile)">
     </span>
   </section>
 </div>
