@@ -3,7 +3,6 @@
 </p>
 
 <div class="word-info-container" *ngFor="let result of results; let i = index">
-    <!-- class="word-info-container__header-wrapper"  -->
   <div class="word-info-container__header-wrapper"
        [ngClass]="{'word-info-container__header-wrapper--border': i > 0 }">
     <div class="homographs" *ngIf="results.length > 1; else singleDefinitionHeader">
@@ -26,16 +25,31 @@
     </div>
   </div>
 
-  <!-- obj.results[0].lexicalEntries[0] -->
   <section class="lexical-category" *ngFor="let lexicalEntry of result.lexicalEntries">
-      <!-- obj.results[0].lexicalEntries[0].lexicalCategory.id -->
-      <h3 class="lexical-category__header">{{ lexicalEntry.lexicalCategory.id }}</h3>
+    <h3 class="lexical-category__header">{{ lexicalEntry.lexicalCategory.id }}</h3>
 
-      <ol class="senses">
-        <!-- senses: -->
-        <li class="sense" *ngFor="let sense of lexicalEntry.entries[0].senses">        
-          <div class="sense__main-block">
-            <ng-template ngFor let-note [ngForOf]="sense.notes">
+    <ol class="senses">
+      <li class="sense" *ngFor="let sense of lexicalEntry.entries[0].senses">        
+        <div class="sense__main-block">
+          <ng-template ngFor let-note [ngForOf]="sense.notes">
+            <span class="sense__word-form-note" *ngIf="isWordFormNoteType(note.type)">
+              (<strong>{{ note.text }}</strong>)
+            </span>
+            <span class="sense__grammatical-note" *ngIf="isGrammaticalNoteType(note.type)">
+              [{{ note.text }}]
+            </span>
+          </ng-template>
+          <span class="sense__definition">
+            <ng-template [ngIf]="sense.definitions" [ngIfElse]="crossReferenceMarker">
+              {{ editDescription(sense.definitions[0]) }}
+            </ng-template>
+            <ng-template #crossReferenceMarker>
+              {{ sense.crossReferenceMarkers[0] }}
+            </ng-template>
+          </span>
+
+          <div class="sense__example" *ngFor="let example of sense.examples">
+            <ng-template ngFor let-note [ngForOf]="example.notes">
               <span class="sense__word-form-note" *ngIf="isWordFormNoteType(note.type)">
                 (<strong>{{ note.text }}</strong>)
               </span>
@@ -43,19 +57,31 @@
                 [{{ note.text }}]
               </span>
             </ng-template>
-            <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].definitions -->
-            <span class="sense__definition">
-              <ng-template [ngIf]="sense.definitions" [ngIfElse]="crossReferenceMarker">
-                {{ editDescription(sense.definitions[0]) }}
-              </ng-template>
-              <ng-template #crossReferenceMarkers>
-                {{ sense.crossReferenceMarkers[0] }}
-              </ng-template>              
-              <!-- {{ editDescription(sense.definitions[0]) }} -->
-            </span>
+            ‘{{ example.text }}’
+          </div>
+        </div>
 
-            <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].examples[0].text -->
-            <div class="sense__example" *ngFor="let example of sense.examples">
+        <ol class="sense__subsenses">
+          <li class="sense__subsense" *ngFor="let subsense of sense.subsenses">
+            <div class="sense__subsense-definition">
+              <ng-template ngFor let-note [ngForOf]="subsense.notes">
+                <span class="sense__word-form-note" *ngIf="isWordFormNoteType(note.type)">
+                  (<strong>{{ note.text }}</strong>)
+                </span>
+                <span class="sense__grammatical-note" *ngIf="isGrammaticalNoteType(note.type)">
+                  [{{ note.text }}]
+                </span>
+              </ng-template>
+
+              <ng-template [ngIf]="subsense.definitions" [ngIfElse]="crossReferenceMarker">
+                {{ editDescription(subsense.definitions[0]) }}
+              </ng-template>
+              <ng-template #crossReferenceMarker>
+                {{ subsense.crossReferenceMarkers[0] }}
+              </ng-template>
+            </div>
+
+            <div class="sense__example" *ngFor="let example of subsense.examples">
               <ng-template ngFor let-note [ngForOf]="example.notes">
                 <span class="sense__word-form-note" *ngIf="isWordFormNoteType(note.type)">
                   (<strong>{{ note.text }}</strong>)
@@ -66,64 +92,27 @@
               </ng-template>
               ‘{{ example.text }}’
             </div>
-          </div>
-
-          <ol class="sense__subsenses">
-            <li class="sense__subsense" *ngFor="let subsense of sense.subsenses">
-              <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[0].definitions -->
-              <div class="sense__subsense-definition">
-                <ng-template ngFor let-note [ngForOf]="subsense.notes">
-                  <span class="sense__word-form-note" *ngIf="isWordFormNoteType(note.type)">
-                    (<strong>{{ note.text }}</strong>)
-                  </span>
-                  <span class="sense__grammatical-note" *ngIf="isGrammaticalNoteType(note.type)">
-                    [{{ note.text }}]
-                  </span>
-                </ng-template>
-
-                <ng-template [ngIf]="subsense.definitions" [ngIfElse]="crossReferenceMarker">
-                  {{ editDescription(subsense.definitions[0]) }}
-                </ng-template>
-                <ng-template #crossReferenceMarkers>
-                  {{ subsense.crossReferenceMarkers[0] }}
-                </ng-template>
-              </div>
-
-              <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[0].examples[0].text -->
-              <div class="sense__example" *ngFor="let example of subsense.examples">
-                <ng-template ngFor let-note [ngForOf]="example.notes">
-                  <span class="sense__word-form-note" *ngIf="isWordFormNoteType(note.type)">
-                    (<strong>{{ note.text }}</strong>)
-                  </span>
-                  <span class="sense__grammatical-note" *ngIf="isGrammaticalNoteType(note.type)">
-                    [{{ note.text }}]
-                  </span>
-                </ng-template>
-                ‘{{ example.text }}’
-              </div>
-            </li>
-          </ol>
-        </li>
-      </ol>
+          </li>
+        </ol>
+      </li>
+    </ol>
   </section>
 
   <section class="lexical-category">
-    <!-- obj.results[0].lexicalEntries[0].entries[0].etymologies -->
     <h3 class="lexical-category__black-header">Origin</h3>
     <div class="lexical-category__etymologies">
       {{ addDot(result.lexicalEntries[0].entries[0].etymologies[0]) }}
     </div>
   </section>
 
-  <!-- <section class="pronunciation-section"> -->
   <section class="lexical-category">
     <h3 class="lexical-category__black-header">Pronunciation</h3>
     <strong class="lexical-category__word">{{ word }}</strong>
-    <!-- obj.results[0].lexicalEntries[0].pronunciations.phoneticSpelling -->
+
     <span class="lexical-category__phonetic-pronunciation">
       /{{ result.lexicalEntries[0].pronunciations[0].phoneticSpelling }}/
     </span>
-    <!-- obj.results[0].lexicalEntries[0].pronunciations.audioFile -->
+
     <span class="word-audio word-audio--pronunciation">
       <img src="assets/audio-hover.svg" alt="audio">
       <audio [src]="result.lexicalEntries[0].pronunciations[0].audioFile"></audio>
