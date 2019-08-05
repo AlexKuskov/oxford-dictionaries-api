@@ -1,7 +1,7 @@
 import { Example } from './example';
 import { Note } from './note';
 
-export class Subsense {
+export interface Subsense {
     definitions: string[];
     examples: Example[];
     notes: Note[];

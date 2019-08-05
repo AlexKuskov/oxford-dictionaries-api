@@ -14,14 +14,8 @@ import { Subsense } from 'src/app/models/subsense';
 })
 export class WordInfoComponent implements OnInit {
 
-  word: string = 'dd';
-  result: Root;
-  
+  word: string = '';
   results: Result[] = [];
-  lexicalEntries: LexicalEntry[] = [];
-  senses: Sense[] = [];
-  subsenses: Subsense[] = [];
-  pronunciation: Pronunciation;
 
   constructor(private mainService: MainService) { }
 
@@ -30,33 +24,8 @@ export class WordInfoComponent implements OnInit {
 
   onSend() {
     this.mainService.getResult().subscribe(response => {
-      console.log("word:");
-      console.log(response.id);
       this.word = response.id;
-      
-      console.log("audio:");
       this.results = response.results;
-
-      this.pronunciation = response.results[0].lexicalEntries[0].pronunciations[0];
-      console.log(this.pronunciation.audioFile);
-      console.log(this.pronunciation.phoneticSpelling);
-      
-      console.log("noun:");
-      console.log(response.results[0].lexicalEntries[0].lexicalCategory.id);
-
-      console.log("sense:");
-      console.log(response.results[0].lexicalEntries[0].entries[0].senses[0].definitions[0]);
-      console.log(response.results[0].lexicalEntries[0].entries[0].senses[0].examples[0].text);
-      console.log(response.results[0].lexicalEntries[0].entries[0].senses[2].notes[0].text);
-
-      console.log("subsense:");
-      console.log(response.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[2].definitions[0]);
-      console.log(response.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[2].examples[0].text);
-      console.log(response.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[2].notes[0].text);
-
-      //Origin
-      console.log("origin:");
-      console.log(response.results[0].lexicalEntries[0].entries[0].etymologies[0]);
     });
   }
 

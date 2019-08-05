@@ -1,4 +1,4 @@
-export class LexicalCategory {
+export interface LexicalCategory {
     id: string;
     text: string;
 }

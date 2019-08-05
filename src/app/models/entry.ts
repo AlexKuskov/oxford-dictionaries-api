@@ -1,6 +1,6 @@
 import { Sense } from './sense';
 
-export class Entry {
+export interface Entry {
     etymologies: string[];
     senses: Sense[];
 }

@@ -37,10 +37,13 @@
             </ng-template>
             <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].definitions -->
             <span class="sense__definition">
-              <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].notes[0].text -->
-              <!-- for text like (bold text), and [negative] text -->
-              
-              {{ editDescription(sense.definitions[0]) }}
+              <ng-template [ngIf]="sense.definitions" [ngIfElse]="crossReferenceMarker">
+                {{ editDescription(sense.definitions[0]) }}
+              </ng-template>
+              <ng-template #crossReferenceMarkers>
+                {{ sense.crossReferenceMarkers[0] }}
+              </ng-template>              
+              <!-- {{ editDescription(sense.definitions[0]) }} -->
             </span>
 
             <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].examples[0].text -->
@@ -71,9 +74,13 @@
                     [{{ note.text }}]
                   </span>
                 </ng-template>
-                <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[0].notes[0].text
-                there are wordFormNote and grammaticalNote types -->
-                {{ editDescription(subsense.definitions[0]) }}
+
+                <ng-template [ngIf]="subsense.definitions" [ngIfElse]="crossReferenceMarker">
+                  {{ editDescription(subsense.definitions[0]) }}
+                </ng-template>
+                <ng-template #crossReferenceMarkers>
+                  {{ subsense.crossReferenceMarkers[0] }}
+                </ng-template>
               </div>
 
               <!-- obj.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[0].examples[0].text -->
