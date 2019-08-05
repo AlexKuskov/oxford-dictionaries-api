@@ -2,20 +2,28 @@
   word-info works!
 </p>
 
-<!-- results: -->
-<div class="word-info-container" *ngFor="let result of results">
-  <h1 class="word-info-container__header">Definition of {{ word }} in English:</h1>
-  <!-- <div class="homographs">
-    <h1 class="homographs__header">Main definitions of <em class="homographs__word">{{ word }}</em> in English</h1>: 
-    <a class="homographs__link" href="#1">set<sup>1</sup></a>
-    <a class="homographs__link" href="#2">set<sup>2</sup></a>
-    <a class="homographs__link" href="#3">set<sup>3</sup></a>
-  </div> -->
-   <!-- obj.id -->
-  <h2 class="word-info-container__word">{{ result.id }}</h2> 
-  <div class="word-audio">
-    <img src="assets/audio-hover.svg" alt="audio">
-    <audio [src]="result.lexicalEntries[0].pronunciations[0].audioFile"></audio>
+<div class="word-info-container" *ngFor="let result of results; let i = index">
+    <!-- class="word-info-container__header-wrapper"  -->
+  <div class="word-info-container__header-wrapper"
+       [ngClass]="{'word-info-container__header-wrapper--border': i > 0 }">
+    <div class="homographs" *ngIf="results.length > 1; else singleDefinitionHeader">
+      <h1 class="homographs__header">Main definitions of <em class="homographs__word">{{ word }}</em> in English</h1>: 
+      <a class="homographs__link" href="#{{ i + 1 }}" *ngFor="let word of results; let i = index">
+        {{ word.id }}<sup>{{ i + 1 }}</sup>
+      </a>
+    </div>
+  
+    <ng-template #singleDefinitionHeader>
+      <h1 class="word-info-container__header">Definition of {{ word }} in English:</h1>
+    </ng-template>
+  
+    <h2 class="word-info-container__word">
+      {{ result.id }}<sup *ngIf="results.length > 1">{{ i + 1 }}</sup>
+    </h2> 
+    <div class="word-audio">
+      <img src="assets/audio-hover.svg" alt="audio">
+      <audio [src]="result.lexicalEntries[0].pronunciations[0].audioFile"></audio>
+    </div>
   </div>
 
   <!-- obj.results[0].lexicalEntries[0] -->
@@ -56,8 +64,6 @@
                   [{{ note.text }}]
                 </span>
               </ng-template>
-              <!-- <span class="sense__word-form-note">(<strong>a word</strong>) </span>
-              <span class="sense__grammatical-note">[with negative]</span> -->
               ‘{{ example.text }}’
             </div>
           </div>
@@ -105,8 +111,6 @@
     <!-- obj.results[0].lexicalEntries[0].entries[0].etymologies -->
     <h3 class="lexical-category__black-header">Origin</h3>
     <div class="lexical-category__etymologies">
-        <!-- Old English, of Germanic origin; related to Dutch woord and German Wort, from an Indo-European 
-        root shared by Latin verbum ‘word’. -->
       {{ addDot(result.lexicalEntries[0].entries[0].etymologies[0]) }}
     </div>
   </section>

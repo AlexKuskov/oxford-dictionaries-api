@@ -5,8 +5,16 @@
     min-height: 500px;
     background-color: rgb(233, 233, 233);
     margin: 0 auto;
-    padding: 18px 20px;
+    padding: 2px 20px;
     color: rgb(42, 42, 42);
+}
+
+.word-info-container__header-wrapper {
+    padding-top: 18px;
+}
+
+.word-info-container__header-wrapper--border {
+    border-top: 1px solid rgb(1, 100, 167);
 }
 
 .word-info-container__header {
@@ -39,7 +47,7 @@
 
 .homographs__link {
     color: rgb(60, 154, 227);
-    margin-right: 8px;
+    margin-right: 4px;
     text-decoration: none;
 
     &:hover {
