@@ -7,7 +7,11 @@
        [ngClass]="{'word-info-container__header-wrapper--border': i > 0 }">
     <div class="homographs" *ngIf="results.length > 1; else singleDefinitionHeader">
       <h1 class="homographs__header">Main definitions of <em class="homographs__word">{{ word }}</em> in English</h1>: 
-      <a class="homographs__link" href="#{{ i + 1 }}" *ngFor="let word of results; let i = index">
+      <a 
+        class="homographs__link"
+        *ngFor="let word of results; let i = index" 
+        [routerLink]="['/']" 
+        fragment="{{ i + 1 }}">
         {{ word.id }}<sup>{{ i + 1 }}</sup>
       </a>
     </div>
@@ -16,7 +20,7 @@
       <h1 class="word-info-container__header">Definition of {{ word }} in English:</h1>
     </ng-template>
   
-    <h2 class="word-info-container__word">
+    <h2 class="word-info-container__word" id="{{ i + 1 }}">
       {{ result.id }}<sup *ngIf="results.length > 1">{{ i + 1 }}</sup>
     </h2> 
     <div class="word-audio">
