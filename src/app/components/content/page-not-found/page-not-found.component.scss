@@ -1,0 +1,33 @@
+.error-page {
+    padding-bottom: 30px;
+    min-height: 320px;
+    text-align: center;
+    width: 822px;
+    margin: 0 auto 280px;
+    background-color: rgb(255, 255, 255);
+}
+
+.error-page__404-error {
+    padding-top: 40px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1em;  
+}
+
+.error-page__page-not-found {
+    font-family: "Merriweather", Georgia, "Times New Roman", sans-serif;
+    font-weight: 700;
+    font-size: 2.2em;
+    line-height: 1.2em;
+    padding: 20px;
+    margin: 0;
+}
+
+.error-page__lead {
+    font-size: 1.1em;
+    line-height: 1.4em;
+}
+
+.error-page__return-homepage {
+    font-size: 14px;
+}

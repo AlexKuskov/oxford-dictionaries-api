@@ -9,6 +9,7 @@
     position: relative;
     width: 822px;
     cursor: pointer;
+    outline: none;
 
     &::after {
         content: '';

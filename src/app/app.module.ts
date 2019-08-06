@@ -10,6 +10,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ContentComponent } from './components/content/content.component';
 import { AboutUsComponent } from './components/content/about-us/about-us.component';
 import { WordInfoComponent } from './components/content/word-info/word-info.component';
+import { PageNotFoundComponent } from './components/content/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { WordInfoComponent } from './components/content/word-info/word-info.comp
     FooterComponent,
     ContentComponent,
     AboutUsComponent,
-    WordInfoComponent
+    WordInfoComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
