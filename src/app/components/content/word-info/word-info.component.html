@@ -1,61 +1,44 @@
-<p (click)="onSend()">
+<!-- <p (click)="onSend()">
   word-info works!
-</p>
+</p> -->
 
-<div class="word-info-container" *ngFor="let result of results; let i = index">
-  <div class="word-info-container__header-wrapper"
-       [ngClass]="{'word-info-container__header-wrapper--border': i > 0 }">
-    <div class="homographs" *ngIf="results.length > 1; else singleDefinitionHeader">
-      <h1 class="homographs__header">Main definitions of <em class="homographs__word">{{ word }}</em> in English</h1>: 
-      <a 
-        class="homographs__link"
-        *ngFor="let word of results; let i = index" 
-        [routerLink]="['/']" 
-        fragment="{{ i + 1 }}">
-        {{ word.id }}<sup>{{ i + 1 }}</sup>
-      </a>
+<ng-template [ngIf]="results.length" [ngIfElse]="wordNotFound">
+  <div class="word-info-container" *ngFor="let result of results; let i = index">
+    <div class="word-info-container__header-wrapper"
+        [ngClass]="{'word-info-container__header-wrapper--border': i > 0 }">
+      <div class="homographs" *ngIf="results.length > 1; else singleDefinitionHeader">
+        <h1 class="homographs__header">Main definitions of <em class="homographs__word">{{ word }}</em> in English</h1>: 
+        <a 
+          class="homographs__link"
+          *ngFor="let word of results; let i = index" 
+          [routerLink]="['/word-info/word']" 
+          fragment="{{ i + 1 }}">
+          {{ word.id }}<sup>{{ i + 1 }}</sup>
+        </a>
+      </div>
+    
+      <ng-template #singleDefinitionHeader>
+        <h1 class="word-info-container__header">Definition of {{ word }} in English:</h1>
+      </ng-template>
+    
+      <h2 class="word-info-container__word" id="{{ i + 1 }}">
+        {{ result.id }}<sup *ngIf="results.length > 1">{{ i + 1 }}</sup>
+      </h2> 
+      <div class="word-audio">
+        <img 
+          src="assets/audio-hover.svg" 
+          alt="audio" 
+          (click)="playAudio(result.lexicalEntries[0].pronunciations[0].audioFile)">
+      </div>
     </div>
-  
-    <ng-template #singleDefinitionHeader>
-      <h1 class="word-info-container__header">Definition of {{ word }} in English:</h1>
-    </ng-template>
-  
-    <h2 class="word-info-container__word" id="{{ i + 1 }}">
-      {{ result.id }}<sup *ngIf="results.length > 1">{{ i + 1 }}</sup>
-    </h2> 
-    <div class="word-audio">
-      <img 
-        src="assets/audio-hover.svg" 
-        alt="audio" 
-        (click)="playAudio(result.lexicalEntries[0].pronunciations[0].audioFile)">
-    </div>
-  </div>
 
-  <section class="lexical-category" *ngFor="let lexicalEntry of result.lexicalEntries">
-    <h3 class="lexical-category__header">{{ lexicalEntry.lexicalCategory.id }}</h3>
+    <section class="lexical-category" *ngFor="let lexicalEntry of result.lexicalEntries">
+      <h3 class="lexical-category__header">{{ lexicalEntry.lexicalCategory.id }}</h3>
 
-    <ol class="senses">
-      <li class="sense" *ngFor="let sense of lexicalEntry.entries[0].senses">        
-        <div class="sense__main-block">
-          <ng-template ngFor let-note [ngForOf]="sense.notes">
-            <span class="sense__word-form-note" *ngIf="isWordFormNoteType(note.type)">
-              (<strong>{{ note.text }}</strong>)
-            </span>
-            <span class="sense__grammatical-note" *ngIf="isGrammaticalNoteType(note.type)">
-              [{{ note.text }}]
-            </span>
-          </ng-template>
-          <span class="sense__definition">
-            <ng-template [ngIf]="sense.definitions" [ngIfElse]="crossReferenceMarker">
-              {{ editDescription(sense.definitions[0]) }}
-            </ng-template>
-            <ng-template #crossReferenceMarker>
-              {{ sense.crossReferenceMarkers[0] }}
-            </ng-template>
-          </span>
-
-          <div class="sense__example" *ngFor="let example of sense.examples">
-            <ng-template ngFor let-note [ngForOf]="example.notes">
+      <ol class="senses">
+        <li class="sense" *ngFor="let sense of lexicalEntry.entries[0].senses">        
+          <div class="sense__main-block">
+            <ng-template ngFor let-note [ngForOf]="sense.notes">
               <span class="sense__word-form-note" *ngIf="isWordFormNoteType(note.type)">
                 (<strong>{{ note.text }}</strong>)
               </span>
@@ -63,31 +46,16 @@
                 [{{ note.text }}]
               </span>
             </ng-template>
-            ‘{{ example.text }}’
-          </div>
-        </div>
-
-        <ol class="sense__subsenses">
-          <li class="sense__subsense" *ngFor="let subsense of sense.subsenses">
-            <div class="sense__subsense-definition">
-              <ng-template ngFor let-note [ngForOf]="subsense.notes">
-                <span class="sense__word-form-note" *ngIf="isWordFormNoteType(note.type)">
-                  (<strong>{{ note.text }}</strong>)
-                </span>
-                <span class="sense__grammatical-note" *ngIf="isGrammaticalNoteType(note.type)">
-                  [{{ note.text }}]
-                </span>
-              </ng-template>
-
-              <ng-template [ngIf]="subsense.definitions" [ngIfElse]="crossReferenceMarker">
-                {{ editDescription(subsense.definitions[0]) }}
+            <span class="sense__definition">
+              <ng-template [ngIf]="sense.definitions" [ngIfElse]="crossReferenceMarker">
+                {{ editDescription(sense.definitions[0]) }}
               </ng-template>
               <ng-template #crossReferenceMarker>
-                {{ subsense.crossReferenceMarkers[0] }}
+                {{ sense.crossReferenceMarkers[0] }}
               </ng-template>
-            </div>
+            </span>
 
-            <div class="sense__example" *ngFor="let example of subsense.examples">
+            <div class="sense__example" *ngFor="let example of sense.examples">
               <ng-template ngFor let-note [ngForOf]="example.notes">
                 <span class="sense__word-form-note" *ngIf="isWordFormNoteType(note.type)">
                   (<strong>{{ note.text }}</strong>)
@@ -98,32 +66,71 @@
               </ng-template>
               ‘{{ example.text }}’
             </div>
-          </li>
-        </ol>
-      </li>
-    </ol>
-  </section>
+          </div>
 
-  <section class="lexical-category">
-    <h3 class="lexical-category__black-header">Origin</h3>
-    <div class="lexical-category__etymologies">
-      {{ addDot(result.lexicalEntries[0].entries[0].etymologies[0]) }}
-    </div>
-  </section>
+          <ol class="sense__subsenses">
+            <li class="sense__subsense" *ngFor="let subsense of sense.subsenses">
+              <div class="sense__subsense-definition">
+                <ng-template ngFor let-note [ngForOf]="subsense.notes">
+                  <span class="sense__word-form-note" *ngIf="isWordFormNoteType(note.type)">
+                    (<strong>{{ note.text }}</strong>)
+                  </span>
+                  <span class="sense__grammatical-note" *ngIf="isGrammaticalNoteType(note.type)">
+                    [{{ note.text }}]
+                  </span>
+                </ng-template>
 
-  <section class="lexical-category">
-    <h3 class="lexical-category__black-header">Pronunciation</h3>
-    <strong class="lexical-category__word">{{ word }}</strong>
+                <ng-template [ngIf]="subsense.definitions" [ngIfElse]="crossReferenceMarker">
+                  {{ editDescription(subsense.definitions[0]) }}
+                </ng-template>
+                <ng-template #crossReferenceMarker>
+                  {{ subsense.crossReferenceMarkers[0] }}
+                </ng-template>
+              </div>
 
-    <span class="lexical-category__phonetic-pronunciation">
-      /{{ result.lexicalEntries[0].pronunciations[0].phoneticSpelling }}/
-    </span>
+              <div class="sense__example" *ngFor="let example of subsense.examples">
+                <ng-template ngFor let-note [ngForOf]="example.notes">
+                  <span class="sense__word-form-note" *ngIf="isWordFormNoteType(note.type)">
+                    (<strong>{{ note.text }}</strong>)
+                  </span>
+                  <span class="sense__grammatical-note" *ngIf="isGrammaticalNoteType(note.type)">
+                    [{{ note.text }}]
+                  </span>
+                </ng-template>
+                ‘{{ example.text }}’
+              </div>
+            </li>
+          </ol>
+        </li>
+      </ol>
+    </section>
 
-    <span class="word-audio word-audio--pronunciation">
-      <img 
-        src="assets/audio-hover.svg" 
-        alt="audio" 
-        (click)="playAudio(result.lexicalEntries[0].pronunciations[0].audioFile)">
-    </span>
-  </section>
-</div>
+    <section class="lexical-category">
+      <h3 class="lexical-category__black-header">Origin</h3>
+      <div class="lexical-category__etymologies">
+        {{ addDot(result.lexicalEntries[0].entries[0].etymologies[0]) }}
+      </div>
+    </section>
+
+    <section class="lexical-category">
+      <h3 class="lexical-category__black-header">Pronunciation</h3>
+      <strong class="lexical-category__word">{{ word }}</strong>
+
+      <span class="lexical-category__phonetic-pronunciation">
+        /{{ result.lexicalEntries[0].pronunciations[0].phoneticSpelling }}/
+      </span>
+
+      <span class="word-audio word-audio--pronunciation">
+        <img 
+          src="assets/audio-hover.svg" 
+          alt="audio" 
+          (click)="playAudio(result.lexicalEntries[0].pronunciations[0].audioFile)">
+      </span>
+    </section>
+  </div>
+</ng-template>
+<ng-template #wordNotFound>
+  <div class="word-info-container">
+    <h2 class="word-info-container__no-matches-found">No exact matches found for "{{ word }}"</h2>
+  </div>
+</ng-template>
