@@ -1,28 +1,24 @@
-<!-- <p (click)="onSend()">
-  word-info works!
-</p> -->
-
-<ng-template [ngIf]="results.length" [ngIfElse]="wordNotFound">
-  <div class="word-info-container" *ngFor="let result of results; let i = index">
+<ng-template [ngIf]="mainService.results.length" [ngIfElse]="wordNotFound">
+  <div class="word-info-container" *ngFor="let result of mainService.results; let i = index">
     <div class="word-info-container__header-wrapper"
         [ngClass]="{'word-info-container__header-wrapper--border': i > 0 }">
-      <div class="homographs" *ngIf="results.length > 1; else singleDefinitionHeader">
-        <h1 class="homographs__header">Main definitions of <em class="homographs__word">{{ word }}</em> in English</h1>: 
+      <div class="homographs" *ngIf="mainService.results.length > 1; else singleDefinitionHeader">
+        <h1 class="homographs__header">Main definitions of <em class="homographs__word">{{ mainService.word }}</em> in English</h1>: 
         <a 
           class="homographs__link"
-          *ngFor="let word of results; let i = index" 
-          [routerLink]="['/word-info/word']" 
+          *ngFor="let word of mainService.results; let i = index" 
+          [routerLink]="['/word-info/', mainService.searchWord]" 
           fragment="{{ i + 1 }}">
           {{ word.id }}<sup>{{ i + 1 }}</sup>
         </a>
       </div>
     
       <ng-template #singleDefinitionHeader>
-        <h1 class="word-info-container__header">Definition of {{ word }} in English:</h1>
+        <h1 class="word-info-container__header">Definition of {{ mainService.word }} in English:</h1>
       </ng-template>
     
       <h2 class="word-info-container__word" id="{{ i + 1 }}">
-        {{ result.id }}<sup *ngIf="results.length > 1">{{ i + 1 }}</sup>
+        {{ result.id }}<sup *ngIf="mainService.results.length > 1">{{ i + 1 }}</sup>
       </h2> 
       <div class="word-audio">
         <img 
@@ -105,7 +101,7 @@
       </ol>
     </section>
 
-    <section class="lexical-category">
+    <section class="lexical-category" *ngIf="result.lexicalEntries[0].entries[0].etymologies">
       <h3 class="lexical-category__black-header">Origin</h3>
       <div class="lexical-category__etymologies">
         {{ addDot(result.lexicalEntries[0].entries[0].etymologies[0]) }}
@@ -114,7 +110,7 @@
 
     <section class="lexical-category">
       <h3 class="lexical-category__black-header">Pronunciation</h3>
-      <strong class="lexical-category__word">{{ word }}</strong>
+      <strong class="lexical-category__word">{{ mainService.word }}</strong>
 
       <span class="lexical-category__phonetic-pronunciation">
         /{{ result.lexicalEntries[0].pronunciations[0].phoneticSpelling }}/
@@ -131,6 +127,6 @@
 </ng-template>
 <ng-template #wordNotFound>
   <div class="word-info-container">
-    <h2 class="word-info-container__no-matches-found">No exact matches found for "{{ word }}"</h2>
+    <h2 class="word-info-container__no-matches-found">No exact matches found for "{{ mainService.searchWord }}"</h2>
   </div>
 </ng-template>

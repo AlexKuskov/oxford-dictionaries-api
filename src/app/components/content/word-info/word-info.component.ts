@@ -1,11 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MainService } from 'src/app/sevices/main.service';
-import { Root } from 'src/app/models/root';
-import { Result } from 'src/app/models/result';
-import { Pronunciation } from 'src/app/models/pronunciation';
-import { LexicalEntry } from 'src/app/models/lexical-entry';
-import { Sense } from 'src/app/models/sense';
-import { Subsense } from 'src/app/models/subsense';
 
 @Component({
   selector: 'app-word-info',
@@ -14,19 +8,9 @@ import { Subsense } from 'src/app/models/subsense';
 })
 export class WordInfoComponent implements OnInit {
 
-  word: string = '';
-  results: Result[] = [];
-
-  constructor(private mainService: MainService) { }
+  constructor(public mainService: MainService) { }
 
   ngOnInit() {
-  }
-
-  onSend(): void {
-    this.mainService.getResult().subscribe(response => {
-      this.word = response.id;
-      this.results = response.results;
-    });
   }
 
   editDescription(description: string): string {
@@ -55,5 +39,4 @@ export class WordInfoComponent implements OnInit {
     audio.load();
     audio.play();
   }
-
 }
