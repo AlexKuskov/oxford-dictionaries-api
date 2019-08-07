@@ -108,7 +108,7 @@
       </div>
     </section>
 
-    <section class="lexical-category">
+    <section class="lexical-category" *ngIf="result.lexicalEntries[0].pronunciations">
       <h3 class="lexical-category__black-header">Pronunciation</h3>
       <strong class="lexical-category__word">{{ mainService.word }}</strong>
 
