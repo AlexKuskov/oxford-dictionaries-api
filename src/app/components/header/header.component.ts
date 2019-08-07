@@ -20,6 +20,7 @@ export class HeaderComponent implements OnInit {
 
   onSubmit(): void {
     this.mainService.searchWord = this.searchForm.form.value.query.toLowerCase();
+    this.mainService.word = this.searchForm.form.value.query.toLowerCase();
     this.mainService.getResult();
   }
 

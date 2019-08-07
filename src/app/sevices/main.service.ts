@@ -13,7 +13,7 @@ export class MainService {
 
   baseUrl: string = "/api/v2/entries/en-gb/";
   searchWord: string = '';
-  
+  isResultReturned: boolean = false;
   word: string = '';
   results: Result[] = [];
 
@@ -25,9 +25,15 @@ export class MainService {
   };
 
   getResult(): void {
+    this.isResultReturned = false;
     this.http.get<Root>(this.baseUrl + this.searchWord, this.httpOptions).subscribe(response => {
       this.word = response.id;
       this.results = response.results;
-    });;
+      this.isResultReturned = true;
+    },
+    (error) => {
+      this.results = [];
+      this.isResultReturned = true;
+    });
   }
 }
