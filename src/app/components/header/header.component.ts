@@ -10,6 +10,9 @@ import { NgForm } from '@angular/forms';
 export class HeaderComponent implements OnInit {
   @ViewChild('searchForm', {read: NgForm}) searchForm: NgForm;
 
+  keyboardBoxOpened: boolean = false;
+  symbolsUppercase: boolean = false;
+
   constructor(public mainService: MainService) { }
 
   ngOnInit() {
@@ -20,4 +23,15 @@ export class HeaderComponent implements OnInit {
     this.mainService.getResult();
   }
 
+  switchKeyboardBox() {
+    this.keyboardBoxOpened = !this.keyboardBoxOpened;
+  }
+
+  switchSymbolsUppercase() {
+    this.symbolsUppercase = !this.symbolsUppercase;
+  }
+
+  addSymbol(symbol: string) {
+    this.mainService.searchWord += symbol;
+  }
 }

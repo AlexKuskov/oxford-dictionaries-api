@@ -10,6 +10,7 @@
     width: 822px;
     cursor: pointer;
     outline: none;
+    user-select: none;
 
     &::after {
         content: '';

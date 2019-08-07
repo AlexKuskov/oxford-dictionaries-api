@@ -8,26 +8,98 @@
             name="query" 
             id="query" 
             placeholder="Type word or phrase" 
-            [ngModel]="mainService.searchWord"
+            [(ngModel)]="mainService.searchWord"
             autocomplete="off" 
             maxlength="100" 
             autocapitalize="none" 
             class="header__word-input"
             required>
-    
-        <div class="header__keyboard" data-behaviour="ga-event-search-scope" data-value="character keyboard">
-            <svg enable-background="new 0 0 28 16.7" height="17" viewBox="0 0 28 16.7" width="28" xmlns="http://www.w3.org/2000/svg">
-                <path d="m26.5 0h-25c-.8 0-1.5.6-1.5 1.4v13.9c0 .8.7 1.4 1.5 1.4h25.1c.8 0 1.5-.6 1.5-1.4v-13.9c-.1-.8-.8-1.4-1.6-1.4m-10.1 2.8h2.9v2.8h-2.9v-2.8m4.3 4.1v2.8h-2.9v-2.8h2.9m-8.7-4.1h2.9v2.8h-2.9v-2.8m4.4 4.1v2.8h-2.9v-2.8h2.9m-8.8-4.1h2.9v2.8h-2.9v-2.8m4.4 4.1v2.8h-2.9v-2.8h2.9m-9-4.1h3.2v2.8h-3.2v-2.8m0 4.1h4.6v2.8h-4.6v-2.8m3.2 7h-3.2v-2.8h3.1v2.8zm13.1 0h-11.7v-2.8h11.6v2.8zm5.8 0h-4.4v-2.8h4.4v2.8m0-4.2h-2.9v-2.8h2.9v2.8m0-4.1h-4.4v-2.8h4.4v2.8" fill="#999"></path>
+
+        <div class="header__keyboard" (click)="switchKeyboardBox()">
+            <svg enable-background="new 0 0 28 16.7" height="17"
+                 viewBox="0 0 28 16.7" width="28" xmlns="http://www.w3.org/2000/svg">
+                <path d="m26.5 0h-25c-.8 0-1.5.6-1.5 1.4v13.9c0 .8.7 1.4 1.5 1.4h25.1c.8 0 1.5-.6
+                         1.5-1.4v-13.9c-.1-.8-.8-1.4-1.6-1.4m-10.1 2.8h2.9v2.8h-2.9v-2.8m4.3 
+                         4.1v2.8h-2.9v-2.8h2.9m-8.7-4.1h2.9v2.8h-2.9v-2.8m4.4 
+                         4.1v2.8h-2.9v-2.8h2.9m-8.8-4.1h2.9v2.8h-2.9v-2.8m4.4 
+                         4.1v2.8h-2.9v-2.8h2.9m-9-4.1h3.2v2.8h-3.2v-2.8m0 
+                         4.1h4.6v2.8h-4.6v-2.8m3.2 7h-3.2v-2.8h3.1v2.8zm13.1 0h-11.7v-2.8h11.6v2.8zm5.8 
+                         0h-4.4v-2.8h4.4v2.8m0-4.2h-2.9v-2.8h2.9v2.8m0-4.1h-4.4v-2.8h4.4v2.8" fill="#999"></path>
             </svg> 
-            <svg class="header__keyboard-arrow" enable-background="new 0 0 14 7" height="7" viewBox="0 0 14 7" width="14" xmlns="http://www.w3.org/2000/svg">
+            <svg class="header__keyboard-arrow" enable-background="new 0 0 14 7" height="7" 
+                 viewBox="0 0 14 7" width="14" xmlns="http://www.w3.org/2000/svg">
                 <path d="M7 4.4 2.6 0 0 0 6.1 6.1 7 7 7.9 6.1 14 0 11.4 0z" fill="#989898"></path>
             </svg>
         </div>
     
-        <button aria-label="Launch search" data-behaviour="ga-event-search-scope" [routerLink]="['/word-info/', searchForm.form.value.query]"
-                data-value="Launch search" type="submit" class="header__search-button" [disabled]="!searchForm.valid">
-            <svg enable-background="new 0 0 22 22" height="30" viewBox="-0.5 -0.5 22 22" width="30" xmlns="http://www.w3.org/2000/svg"><path d="m21.8 19.6l-4.5-4.5c2.7-3.7 2.3-8.9-1-12.3-3.7-3.7-9.8-3.7-13.5 0-3.7 3.7-3.7 9.7 0 13.5 3.4 3.4 8.6 3.7 12.3 1l4.5 4.5c.4.4 1 .3 1.5-.2l.5-.5c.5-.5.5-1.1.2-1.5m-7.6-5.3c-2.6 2.6-6.8 2.6-9.4 0-2.6-2.6-2.6-6.8 0-9.4 2.6-2.6 6.8-2.6 9.4 0 2.5 2.6 2.5 6.8 0 9.4" fill="#f77941"></path></svg>
+        <button class="header__search-button" type="submit" [disabled]="!searchForm.valid"
+                [routerLink]="['/word-info/', searchForm.form.value.query]">
+            <svg enable-background="new 0 0 22 22" height="30" viewBox="-0.5 -0.5 22 22"
+                 width="30" xmlns="http://www.w3.org/2000/svg">
+                 <path d="m21.8 19.6l-4.5-4.5c2.7-3.7 2.3-8.9-1-12.3-3.7-3.7-9.8-3.7-13.5 0-3.7 3.7-3.7 
+                          9.7 0 13.5 3.4 3.4 8.6 3.7 12.3 1l4.5 4.5c.4.4 1 .3 
+                          1.5-.2l.5-.5c.5-.5.5-1.1.2-1.5m-7.6-5.3c-2.6 2.6-6.8 2.6-9.4 0-2.6-2.6-2.6-6.8 
+                          0-9.4 2.6-2.6 6.8-2.6 9.4 0 2.5 2.6 2.5 6.8 0 9.4" fill="#f77941"></path>
+            </svg>
         </button>
+
+        <div class="keyboard-box" [ngClass]="{'keyboard-box--opened': keyboardBoxOpened}">
+            <div class="keyboard-box__content">
+                <ul class="keyboard-box__symbol-list" 
+                    [ngClass]="{'keyboard-box__symbol-list--uppercase': symbolsUppercase}"
+                    (click)="addSymbol($event.target.innerText)">
+                    <li class="keyboard-box__list-item"><span>à</span></li>
+                    <li class="keyboard-box__list-item"><span>á</span></li>
+                    <li class="keyboard-box__list-item"><span>â</span></li>
+                    <li class="keyboard-box__list-item"><span>ä</span></li>
+                    <li class="keyboard-box__list-item"><span>ã</span></li>
+                    <li class="keyboard-box__list-item"><span>ă</span></li>
+                    <li class="keyboard-box__list-item"><span>ā</span></li>
+                    <li class="keyboard-box__list-item"><span>ç</span></li>
+                    <li class="keyboard-box__list-item"><span>č</span></li>
+                    <li class="keyboard-box__list-item"><span>è</span></li>
+                    <li class="keyboard-box__list-item"><span>é</span></li>
+                    <li class="keyboard-box__list-item"><span>ê</span></li>
+                    <li class="keyboard-box__list-item"><span>ë</span></li>
+                    <li class="keyboard-box__list-item"><span>ē</span></li>
+                    <li class="keyboard-box__list-item"><span>ģ</span></li>
+                    <li class="keyboard-box__list-item"><span>ì</span></li>
+                    <li class="keyboard-box__list-item"><span>í</span></li>
+                    <li class="keyboard-box__list-item"><span>î</span></li>
+                    <li class="keyboard-box__list-item"><span>ï</span></li>
+                    <li class="keyboard-box__list-item"><span>ī</span></li>
+                    <li class="keyboard-box__list-item"><span>ķ</span></li>
+                    <li class="keyboard-box__list-item"><span>ļ</span></li>
+                    <li class="keyboard-box__list-item"><span>ñ</span></li>
+                    <li class="keyboard-box__list-item"><span>ň</span></li>
+                    <li class="keyboard-box__list-item"><span>ņ</span></li>
+                    <li class="keyboard-box__list-item"><span>ò</span></li>
+                    <li class="keyboard-box__list-item"><span>ó</span></li>
+                    <li class="keyboard-box__list-item"><span>ô</span></li>
+                    <li class="keyboard-box__list-item"><span>ö</span></li>
+                    <li class="keyboard-box__list-item"><span>õ</span></li>
+                    <li class="keyboard-box__list-item"><span>ş</span></li>
+                    <li class="keyboard-box__list-item"><span>š</span></li>
+                    <li class="keyboard-box__list-item"><span>ţ</span></li>
+                    <li class="keyboard-box__list-item"><span>ù</span></li>
+                    <li class="keyboard-box__list-item"><span>ú</span></li>
+                    <li class="keyboard-box__list-item"><span>û</span></li>
+                    <li class="keyboard-box__list-item"><span>ü</span></li>
+                    <li class="keyboard-box__list-item"><span>ū</span></li>
+                    <li class="keyboard-box__list-item"><span>ý</span></li>
+                    <li class="keyboard-box__list-item"><span>ž</span></li>
+                    <li class="keyboard-box__list-item"><span>æ</span></li>
+                    <li class="keyboard-box__list-item"><span>œ</span></li>
+                    <li class="keyboard-box__list-item"><span>ß</span></li>
+                </ul>
+                <i class="keyboard-box__upper" (click)="switchSymbolsUppercase()">
+                    <svg enable-background="new 0 0 16.8 16" height="16"
+                         viewBox="0 0 16.8 16" width="16" xmlns="http://www.w3.org/2000/svg">
+                        <path d="m8.4 0l-8.4 8.4h5.1v7.6h6.6v-7.6h5.1z" fill="#2a2a2a"></path>
+                    </svg>
+                </i>
+            </div>
+        </div>
     </form>
   </div>
 </header>

@@ -67,3 +67,54 @@
     outline: none;
     cursor: pointer;
 }
+
+.keyboard-box {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 1;
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    margin-top: -2px;
+    display: none;
+    border: 2px solid #2f2d2e;
+    border-top: 1px solid #ccc;
+    border-radius: 0 0 5px 5px;
+    background-color: #f5f5f5;
+}
+
+.keyboard-box--opened {
+    display: block;
+}
+
+.keyboard-box__symbol-list {
+    margin: 0;
+    padding: 5px 36px 5px 12px;
+    list-style: none;
+    line-height: 20px;
+}
+
+.keyboard-box__symbol-list--uppercase {
+    text-transform: uppercase;
+}
+
+.keyboard-box__list-item {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0 3px;
+    cursor: pointer;
+    user-select: none;
+
+    &:hover {
+        background-color: rgb(215, 215, 215);
+    }
+}
+
+.keyboard-box__upper {
+    position: absolute;
+    top: 9px;
+    right: 12px;
+    cursor: pointer;
+}
