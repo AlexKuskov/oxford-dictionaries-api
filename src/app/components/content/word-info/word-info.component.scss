@@ -1,16 +1,19 @@
 @import url('https://fonts.googleapis.com/css?family=Merriweather:400i,700&display=swap');
 
 .word-info-container {
-    width: 772px;
-    min-height: 500px;
-    background-color: rgb(255, 255, 255);
+    width: var(--global--width);
+    background-color: var(--global--color--primary-light);
     margin: 0 auto;
     padding: 2px 20px;
-    color: rgb(42, 42, 42);
+    color: var(--global--text--color);
 }
 
-.word-info-container__no-matches-found {
-    font-weight: 400;
+.word-info-container--not-found {
+    min-height: 400px;
+}
+
+.word-info-container__no-matches-found-text {
+    font-weight: var(--global--font-weight--normal);
     font-size: 32px;
 }
 
@@ -23,31 +26,31 @@
 }
 
 .word-info-container__header {
-    font-size: 16px;
-    font-weight: 400;
+    font-size: var(--global--font-size--md);
+    font-weight: var(--global--font-weight--normal);
     margin: 0;
 }
 
 .homographs {
-    border: 2px solid #DFEAF0;
+    border: 2px solid rgb(223, 234, 240);
     padding: 8px;
     padding-bottom: 5px;
-    background-color: #f8fafe;
+    background-color: rgb(248, 250, 254);
     font-weight: 600;
     line-height: 1.6em;
-    font-size: 16px;
+    font-size: var(--global--font-size--md);
 }
 
 .homographs__header {
     display: inline;
     max-width: 100%;
-    font-weight: 400;
-    font-size: 16px;
+    font-weight: var(--global--font-weight--normal);
+    font-size: var(--global--font-size--md);
 }
 
 .homographs__word {
     font-style: normal;
-    font-weight: 700;
+    font-weight: var(--global--font-weight--bold);
 }
 
 .homographs__link {
@@ -88,7 +91,7 @@
     color: rgb(241, 90, 36);
     text-transform: uppercase;
     letter-spacing: 0.8px;
-    font-size: 16px;
+    font-size: var(--global--font-size--md);
     margin: 0;
 }
 
@@ -129,11 +132,11 @@
 
     &::before {
         content: counter(sense);
-        font-weight: 700;
+        font-weight: var(--global--font-weight--bold);
         position: absolute;
         left: -24px;
         top: 4px;
-        font-size: 14px;
+        font-size: var(--global--font-size--sm);
     }
 }
 
@@ -151,11 +154,11 @@
 
     &::before {
         content: counter(sense) "." counter(subsense);
-        font-weight: 700;
+        font-weight: var(--global--font-weight--bold);
         position: absolute;
         left: 0;
         top: 4px;
-        font-size: 14px;
+        font-size: var(--global--font-size--sm);
     }
 }
 
@@ -163,7 +166,7 @@
     color: rgb(0, 0, 0);
     margin: 0;
     margin-bottom: 4px;
-    font-size: 18px;
+    font-size: var(--global--font-size--lg);
 }
 
 .lexical-category__phonetic-pronunciation {
@@ -177,7 +180,7 @@
 
 .sense__grammatical-note {
     font-family: "Open Sans", Helvetica, Arial, sans-serif;
-    color: #27a058;
+    color: rgb(39, 160, 88);
     font-style: italic;
     font-size: 16px;
 }

@@ -1,10 +1,10 @@
 .about-us {
     position: relative;
-    width: 772px;
-    margin: 20px auto;
+    width: var(--global--width);
+    margin: 0 auto;
     padding: 0 30px;
     padding-bottom: 65px;
-    background-color: rgb(245, 245, 245);
+    background-color: var(--global--color--primary-light);
 
     &::before {
         content: "";
@@ -13,7 +13,7 @@
         left: 32px;
         right: 32px;
         height: 0;
-        border-bottom: 1px solid #ccc;
+        border-bottom: 1px solid rgb(204, 204, 204);
     }
 }
 
@@ -25,13 +25,13 @@
 }
 
 .about-us__header-text {
-    border-bottom: 1px solid #2f2d2e;
-    font-weight: 400;
+    border-bottom: 1px solid rgb(47, 45, 46);
+    font-weight: var(--global--font-weight--normal);
     font-size: 40px;
 }
 
 .about-us__content-text {
     font-size: 16px;
     line-height: 26px;
-    color: rgb(42, 42, 42);
+    color: var(--global--text--color);
 }
