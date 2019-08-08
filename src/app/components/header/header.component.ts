@@ -16,11 +16,17 @@ export class HeaderComponent implements OnInit {
   constructor(public mainService: MainService) { }
 
   ngOnInit() {
+    this.mainService.word = localStorage.getItem('word');
+    this.mainService.searchWord = localStorage.getItem('searchWord');
+    this.mainService.isResultReturned = localStorage.getItem('isResultReturned') == "true";
+    this.mainService.results = JSON.parse(localStorage.getItem('results'));
   }
 
   onSubmit(): void {
     this.mainService.searchWord = this.searchForm.form.value.query.toLowerCase();
     this.mainService.word = this.searchForm.form.value.query.toLowerCase();
+    localStorage.setItem("searchWord", this.mainService.searchWord);
+    localStorage.setItem("word", this.mainService.word);
     this.mainService.getResult();
   }
 

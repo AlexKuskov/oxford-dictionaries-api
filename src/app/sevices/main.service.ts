@@ -26,14 +26,21 @@ export class MainService {
 
   getResult(): void {
     this.isResultReturned = false;
+    localStorage.setItem("isResultReturned", this.isResultReturned.toString());
+
     this.http.get<Root>(this.baseUrl + this.searchWord, this.httpOptions).subscribe(response => {
       this.word = response.id;
       this.results = response.results;
       this.isResultReturned = true;
+      localStorage.setItem("word", this.word);
+      localStorage.setItem("results", JSON.stringify(this.results));
+      localStorage.setItem("isResultReturned", this.isResultReturned.toString());
     },
     (error) => {
       this.results = [];
       this.isResultReturned = true;
+      localStorage.setItem("results", JSON.stringify(this.results));
+      localStorage.setItem("isResultReturned", this.isResultReturned.toString());
     });
   }
 }
