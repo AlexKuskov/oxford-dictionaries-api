@@ -8,7 +8,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  @ViewChild('searchForm', {read: NgForm}) searchForm: NgForm;
+  @ViewChild('searchForm', { read: NgForm, static: true }) searchForm: NgForm;
 
   keyboardBoxOpened: boolean = false;
   symbolsUppercase: boolean = false;
